@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+    <http:listener-config name="HTTP_Listener_Configuration1" host="0.0.0.0" port="8082" doc:name="HTTP Listener Configuration"/>
+    <http:request-config name="HTTP_Request_Configuration" host="localhost" port="8082" doc:name="HTTP Request Configuration"/>
+ 
+ 
+    <flow name="tttFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/tt" doc:name="HTTP"/>
+       <enricher target="#[flowVars.new_value]" source="#[message.payload.result]" doc:name="Message Enricher">
+        <processor-chain doc:name="Processor Chain">
+            <flow-ref name="getValue" doc:name="Flow Reference"/>
+            <logger doc:name="Logger" level="INFO"   message="dgdgdfgdfgdfgdfgdf #[payload]" />
+            <json:json-to-object-transformer  returnClass="java.lang.Object" doc:name="JSON to Object" />
+            
+              </processor-chain>
+         </enricher>
+
+  <logger doc:name="Logger" level="INFO"   message="authorization_token #[flowVars.new_value]" />
+  
+    </flow>
+
+ <flow name="getValue">
+        <set-payload value="{ &quot;result&quot;: &quot;new_value'&quot;}" mimeType="application/json" doc:name="Set Payload"/>
+       <json:object-to-json-transformer doc:name="Object to JSON"/>
+    
+
+  </flow>
+  
+   
+</mule>

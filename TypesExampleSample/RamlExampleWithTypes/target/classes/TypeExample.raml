@@ -1,0 +1,59 @@
+#%RAML 0.8
+---
+title: Sample API
+version: v2
+#baseUri: https://app.zencoder.com/api
+#baseUri: https://mocksvc.mulesoft.com/mocks/6d8cfe20-1144-4c1c-bd46-9fe7af4238ea/api
+#baseUri: https://mocksvc.mulesoft.com/mocks/839b94ad-314d-4619-a07a-24e588bed332/mocks/6d8cfe20-1144-4c1c-bd46-9fe7af4238ea/api
+baseUri: https://mocksvc.mulesoft.com/mocks/dd86922c-7da0-4fb0-811d-c5b89def1733/mocks/839b94ad-314d-4619-a07a-24e588bed332/mocks/6d8cfe20-1144-4c1c-bd46-9fe7af4238ea/api
+documentation:
+ - title: Welcome Page
+   content: !
+     "Hi, \nthis is a sample *open source project* \n to demonstrate the implementation of **RAML**  specification with Anypoint Studio.
+     
+     This project will be extended to a full time open source project soon.
+     
+     For more info, please visit [My Git repo](https://github.com/anirban37?tab=repositories)"
+     
+ - title: About test
+   content: A **sample** project to *demonstrate* implementation of RAML
+     specification with Anypoint Studio.
+     
+     Build with API Designer                        
+
+
+/people:
+  get:
+    responses:
+      
+      200:
+        body:
+         application/json:
+           example: |
+            {
+              "scac": "aact",
+              "proNum": "10001"
+            }
+            
+            
+  post:
+        description: !
+          "Creates a new account. Some **bold** text here. More text. Need to fill the line, so make it longer still. Hooray!\n
+          Line two Starts here"     
+  /{id}:  
+    description: >
+          this is a string
+           that will \nbe one
+          line in the file
+
+    displayName: ID
+    get:      
+      responses:
+       200:
+        body:
+         application/json:
+           example: |
+            {
+              "scac": "aact",
+              "proNum": "10001"
+            }  

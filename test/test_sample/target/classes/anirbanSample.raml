@@ -1,0 +1,112 @@
+#%RAML 0.8
+title: anirban-sample
+version: 0.001
+baseUri: http://localhost:8081/myurl
+
+#===============================================================
+#  API documentation
+#===============================================================
+documentation:
+ - title: Welcome Page
+   content: |
+     Hi, this is a sample *open source project* to demonstrate the implementation of **RAML**  specification with Anypoint Studio.
+     
+     This project demonstrate an imaginary book as a sample demo and demonstrate an API for an imaginary book store for their shippment.
+     
+     For more info, please visit [My Git repo](https://github.com/anirban37?tab=repositories)
+     
+ - title: About test
+   content: A **sample** project to *demonstrate* implementation of RAML
+     specification with Anypoint Studio and demonstrate an API for an imaginary bookstore.
+     
+     Build with API Designer                        
+
+
+  #---------------------------------------------------------------
+  # Resource section.
+  #---------------------------------------------------------------
+
+
+/account:
+  post:
+    description: Add new Account
+    body:
+      application/json:
+        schema: !include schemas/addAccountRequestSchema.json
+        example:  !include json/request/addAccountRequest.json 
+    responses:  
+      200:
+        body:
+          application/json:
+            example:  !include json/response/addAccountResponse.json 
+      400:
+        body:      
+          application/json:
+            example: !include json/error/error-400.json
+      500:
+        body:      
+          application/json:
+           example: !include json/error/error-500.json      
+  put:
+    description: Update the account details
+    body:            
+      application/json:
+        schema: !include schemas/updateAccountRequestSchema.json
+        example:  !include json/request/updateAccountRequest.json
+    responses:    
+      200:
+        body:
+          application/json:    
+            example:  !include json/response/updateAccountResponse.json
+      400:
+        body:      
+          application/json:
+            example: !include json/error/error-400.json
+      500:
+        body:      
+          application/json:
+            example: !include json/error/error-500.json
+  /{myAccountToken}:
+    get:
+      queryParameters:
+        scac: 
+          type: string
+          required: false
+      description:  Get the account details for account token
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include json/response/accountDetailsResponse.json 
+        400:
+          body:      
+            application/json:
+              example: !include json/error/error-400.json
+        500:
+          body:      
+            application/json:
+              example: !include json/error/error-500.json
+
+/dispatchAccount:
+  displayName:  Dispatch
+  post:
+    description:  Get Dispatch Account status
+    body:
+      application/json:
+        schema: !include schemas/dispatchRequestSchema.json
+        example: !include json/request/dispatchRequest.json
+    responses:    
+      200:
+        body:
+          application/json:
+            example: !include json/response/dispatchResponse.json
+      400:
+          body:      
+            application/json:
+              example: !include json/error/error-400.json
+      500:
+        body:      
+          application/json:
+            example: !include json/error/error-500.json 
+
+  
